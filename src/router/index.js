@@ -39,11 +39,99 @@ export const constantRouterMap = [
   },
 
   {
+    path: '/customer',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Customer',
+        component: () => import('@/views/customer/index'),
+        meta: { title: 'Customer', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/product',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Product',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Product', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/depot',
+    component: Layout,
+    redirect: '/depot/zone',
+    name: 'Depot',
+    meta: { title: 'Depot Setting', icon: 'example' },
+    children: [
+      {
+        path: 'zone',
+        name: 'Zone',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Zone Setting', icon: 'table' }
+      },
+      {
+        path: 'shelf',
+        name: 'Shelft',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Shelf Setting', icon: 'tree' }
+      }
+    ]
+  },
+
+  {
+    path: '/system',
+    component: Layout,
+    redirect: '/system/index',
+    name: 'System',
+    meta: { title: 'System Setting', icon: 'example' },
+    children: [
+      {
+        path: 'index',
+        name: 'Basic',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Basic Manager', icon: 'table' }
+      },
+      {
+        path: 'depot',
+        name: 'Depot',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Depot Manager', icon: 'table' }
+      },
+      {
+        path: 'group',
+        name: 'Group',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Group Manager', icon: 'table' }
+      },
+      {
+        path: 'user',
+        name: 'User',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'User Manager', icon: 'table' }
+      },
+      {
+        path: 'log',
+        name: 'Log',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Log Record', icon: 'table' }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: { title: 'ExampleTest', icon: 'example' },
     children: [
       {
         path: 'table',
