@@ -76,3 +76,60 @@ a:hover {
 .app-container {
   padding: 20px;
 }
+
+.query-wrapper {
+  padding: 12px 0 12px 0;
+  .query-item {
+    margin-bottom: 8px;
+    width: 560px;
+    &:after,&:before {
+      display: table;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+    label {
+      text-align: right;
+      vertical-align: middle;
+      float: left;
+      font-size: 14px;
+      color: #606266;
+      padding: 0 12px 0 0;
+      box-sizing: border-box;
+      line-height: 28px;
+      width: 100px;
+    }
+    .el-input {
+      width: 300px;
+      .el-input__inner {
+        height: 28px;
+        line-height: 28px;
+      }
+      .el-input__icon {
+        line-height: 28px;
+      }
+    }
+    .el-input-number {
+      width: 180px;
+      line-height: 28px;
+      .el-input-number__decrease, .el-input-number__increase {
+        line-height: 14px;
+      }
+      .el-input {
+        width: 180px;
+      }
+    }
+    .el-range-editor {
+      height: 28px;
+      line-height: 28px;
+      padding: 0 10px 0 10px;
+    }
+  }
+  .query-btn {
+    width: 560px;
+    .el-button {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
