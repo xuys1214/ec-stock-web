@@ -58,7 +58,7 @@ export const constantRouterMap = [
       {
         path: 'index',
         name: 'Product',
-        component: () => import('@/views/table/index'),
+        component: () => import('@/views/product/index'),
         meta: { title: 'Product', icon: 'form' }
       }
     ]
