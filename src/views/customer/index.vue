@@ -51,6 +51,17 @@
         </div>
       </div>
     </div>
+
+    <el-button type="primary" icon="el-icon-edit" @click="dlgVisible=true">新增</el-button>
+
+    <add-dialog
+      :data="dlgData"
+      :title="dlgTitle"
+      :dlg-visible="dlgVisible"
+      @save="saveDialog"
+      @cancle="closeDialog"
+    />
+
     <el-table
       v-loading="listLoading"
       ref="multipleTable"
@@ -126,6 +137,39 @@ export default {
   },
   data() {
     return {
+      dlgVisible: false,
+      dlgTitle: '修改',
+      dlgData: [{
+        type: 'input',
+        name: 'test',
+        value: 100
+      },
+      {
+        type: 'input-number',
+        name: 'test1',
+        value: 1002,
+        max: 1005
+      },
+      {
+        type: 'select',
+        name: 'selsect',
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }]
+      }],
       list: null,
       listLoading: true,
       tableMultipleSelection: [],
@@ -192,6 +236,13 @@ export default {
     },
     handleSelectionChange(val) {
       this.tableMultipleSelection = val
+    },
+    closeDialog(val) {
+      this.dlgVisible = val
+    },
+    saveDialog(data) {
+      console.log('data:', data)
+      this.dlgVisible = false
     }
   }
 }

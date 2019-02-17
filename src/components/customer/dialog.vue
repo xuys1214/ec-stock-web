@@ -1,11 +1,9 @@
 <template>
   <section>
-    <el-button type="text" @click="dialogFormVisible = true">打开嵌套表单的 Dialog</el-button>
-
-    <el-dialog :visible.sync="dialogFormVisible" :title="dlgTitle">
+    <el-dialog :visible.sync="dlgVisible" :title="title">
       <div class="dialog-wrapper">
         <div
-          v-for="(item,key) in dlgItems"
+          v-for="(item,key) in data"
           :key="key"
           class="dialog-item">
           <!--Input控件-->
@@ -44,7 +42,7 @@
             <label>{{ item.name }}</label>
             <el-date-picker
               v-model="item.value"
-              :picker-options="options"
+              :picker-options="item.options"
               type="datetimerange"
               range-separator="至"
               start-placeholder="开始日期"
@@ -55,8 +53,8 @@
 
       </div>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button @click="closeDialog()">取 消</el-button>
+        <el-button type="primary" @click="save()">确 定</el-button>
       </div>
     </el-dialog>
   </section>
@@ -64,73 +62,33 @@
 
 <script>
 export default {
+  props: {
+    title: {
+      default: '新增',
+      type: String
+    },
+    data: {
+      default() {
+        return []
+      },
+      type: Array
+    },
+    dlgVisible: {
+      default: false,
+      type: Boolean
+    }
+  },
   data() {
     return {
-      dialogTableVisible: false,
-      dialogFormVisible: false,
-      dlgTitle: '新增',
-      dlgItems: [{
-        type: 'input',
-        name: 'test',
-        value: 100
-      },
-      {
-        type: 'input-number',
-        name: 'test1',
-        value: 1002,
-        max: 1005
-      },
-      {
-        type: 'select',
-        name: 'selsect',
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }]
-      },
-      {
-        type: 'dateTimePicker',
-        name: '注册时间',
-        options: {
-          shortcuts: [{
-            text: '最近一周',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
-              picker.$emit('pick', [start, end])
-            }
-          }, {
-            text: '最近一个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
-              picker.$emit('pick', [start, end])
-            }
-          }, {
-            text: '最近三个月',
-            onClick(picker) {
-              const end = new Date()
-              const start = new Date()
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
-              picker.$emit('pick', [start, end])
-            }
-          }]
-        }
-      }]
+
+    }
+  },
+  methods: {
+    closeDialog() {
+      this.$emit('cancle', false)
+    },
+    save() {
+      this.$emit('save', this.data)
     }
   }
 }
